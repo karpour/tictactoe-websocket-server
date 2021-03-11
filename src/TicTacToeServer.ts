@@ -25,15 +25,15 @@ export default class TicTacToeServer {
 
     private _playerConnections: { [key in PlayerSymbol]: WebSocket | undefined };
 
-    public constructor(port: number = 8080) {
-        console.log(`TicTacToe Server started`);
+    public constructor(port: number = 48080) {
+        console.log(`TicTacToe Server started on port ${port}`);
         this._playerConnections = {
             CIRCLE: undefined,
             CROSS: undefined
         };
         this._game = new TicTacToeGame();
 
-        this._wss = new WebSocket.Server({ port: port });
+        this._wss = new WebSocket.Server({ port: port, });
 
         this._wss.on('connection', (ws: WebSocket, req: IncomingMessage) => {
             let symbol: PlayerSymbol | undefined = this.assignPlayer(ws);

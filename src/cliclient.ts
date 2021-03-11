@@ -9,7 +9,16 @@ const rl = readline.createInterface({
 
 
 async function main() {
-    const client = await TicTacToeClient.connect("ws://localhost:8080");
+    let server = "localhost";
+    let port = 48080;
+
+    if (process.argv[2]) server = process.argv[2];
+
+    let address = `ws://${server}:${port}`;
+
+    const client = await TicTacToeClient.connect(address);
+
+    //console.log(`Connected to ${address}`);
 
     rl.on('line', function (line) {
         let numberValue: GridPosition | undefined = undefined;
